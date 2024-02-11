@@ -32,3 +32,8 @@
 >папка: SQL, файл - Проверки.md, файл - Проверки.pdf
 В данных файлах хранятся sql скрипты для проверки БД - Расписание. \
 Ссылка на песчницу - https://sql-academy.org/ru/sandbox
+
+
+### <span style="color:red"> Пометка </span>
+Если при запуске проекта сброщик выдает ошибку: Конфликт версии Java и версии Gradle. То нужно будет именить версии Gradle (8.1 или новее). \
+Файл - gradle-wrapper.properties Строка - distributionUrl=https\://services.gradle.org/distributions/gradle-8.1-bin.zip
