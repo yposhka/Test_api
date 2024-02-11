@@ -17,14 +17,16 @@ public class RequestUser {
     private static final Random RANDOM = new Random();
 
     private String login;
-    private String newPassword = "twsqss";
+    private final String newPassword = "twsqss";
 
     public static String generateRandomString() {
         StringBuilder stringBuilder = new StringBuilder();
+
         for (int i = 0; i < 10; i++) {
             int randomIndex = RANDOM.nextInt(CHARACTERS.length());
             stringBuilder.append(CHARACTERS.charAt(randomIndex));
         }
+
         return stringBuilder.toString();
     }
 
@@ -43,16 +45,16 @@ public class RequestUser {
                 .when()
                 .post(URL + "/api/signup");
 
+        Assertions.assertNotNull(response.then().extract().jsonPath().get("register_data.id"));
+        Assertions.assertNotNull(response.then().extract().jsonPath().get("info.message"));
+        Assertions.assertNotNull(response.then().extract().jsonPath().get("info.status"));
+
         Assertions.assertEquals(
                 userReg.getLogin(), response.then().extract().jsonPath().getString("register_data.login")
         );
         Assertions.assertEquals(
                 userReg.getPass(), response.then().extract().jsonPath().getString("register_data.pass")
         );
-
-        Assertions.assertNotNull(response.then().extract().jsonPath().get("register_data.id"));
-        Assertions.assertNotNull(response.then().extract().jsonPath().get("info.message"));
-        Assertions.assertNotNull(response.then().extract().jsonPath().get("info.status"));
     }
 
     @Test
