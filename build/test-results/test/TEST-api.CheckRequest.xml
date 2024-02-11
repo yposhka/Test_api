@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.CheckRequest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-11T10:04:46" hostname="DESKTOP-OCM6K51" time="1.561">
+  <properties/>
+  <testcase name="checkPostImage()" classname="api.CheckRequest" time="1.561"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
