@@ -7,10 +7,26 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static io.restassured.RestAssured.given;
 
 public class RequestUser {
     private final static String URL = "http://85.192.34.140:8080";
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final Random RANDOM = new Random();
+
+    private String login;
+    private String newPassword = "twsqss";
+
+    public static String generateRandomString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            int randomIndex = RANDOM.nextInt(CHARACTERS.length());
+            stringBuilder.append(CHARACTERS.charAt(randomIndex));
+        }
+        return stringBuilder.toString();
+    }
 
     @Test
     public void postCreateUser() {
@@ -18,7 +34,8 @@ public class RequestUser {
                 Specifications.requestSpecification(URL), Specifications.responseSpecification201()
         );
 
-        UserReg userReg = new UserReg("login", "root");
+        login = generateRandomString();
+        UserReg userReg = new UserReg(login, "root");
 
         Response response = given()
                 .contentType(ContentType.JSON)
@@ -44,7 +61,7 @@ public class RequestUser {
                 Specifications.requestSpecification(URL), Specifications.responseSpecification200()
         );
 
-        User user = new User("root", "login");
+        User user = new User("root", login);
 
         Response response = given()
                 .contentType(ContentType.JSON)
@@ -61,7 +78,7 @@ public class RequestUser {
                 Specifications.requestSpecification(URL), Specifications.responseSpecification200()
         );
 
-        String requestBody = "{\"password\": \"twsqss\"}";
+        String requestBody = "{\"password\": \""+newPassword+"\"}";
 
         Response response = given()
                 .header("Authorization", "Bearer " + getToken())
@@ -80,14 +97,12 @@ public class RequestUser {
                 Specifications.requestSpecification(URL), Specifications.responseSpecification200()
         );
 
-        String password = "twsqss";
-
         Response response = given()
                 .header("Authorization", "Bearer " + getToken())
                 .when()
                 .get(URL + "/api/user");
 
-        Assertions.assertEquals(password, response.then().extract().jsonPath().get("pass").toString());
+        Assertions.assertEquals(newPassword, response.then().extract().jsonPath().get("pass").toString());
     }
 
     @Test
