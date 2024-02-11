@@ -7,6 +7,7 @@
 * Фреймворк для тестирования: JUnit 4.13.2 и JUnit JUpiter 5.7.0;
 * Библиотека для работы с JSON: Jackson 2.16.1.
 ### Классы и методы
+>Ссылка на открытую API - http://85.192.34.140:8080/swagger-ui/index.html# \
 
 >files-controller, файл - RequestFiles.java
 1. getImage - метод для проверки загрузки картинки;
