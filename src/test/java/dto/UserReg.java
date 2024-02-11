@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class UserReg {
 
-    private ArrayList<Object> games = null;
+    private ArrayList<Object> games = new ArrayList<>();
     private String login;
     private String pass;
 
