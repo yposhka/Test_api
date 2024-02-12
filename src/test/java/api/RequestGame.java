@@ -1,6 +1,6 @@
 package api;
 
-import dto.game.Root;
+import dto.game.Game;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,49 +11,31 @@ public class RequestGame {
     private final static String URL = "http://85.192.34.140:8080";
     private final static int gameId = 1;
 
-    private int size;
+    private RequestUser requestUser = new RequestUser();
 
     @Test
     public void getAllGame() {
-        Specifications.installSpecification(
-                Specifications.requestSpecification(URL), Specifications.responseSpecification200()
-        );
 
         Response response = given()
-                .header("Authorization", "Bearer " + new RequestUser().getToken())
+                .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
                 .when()
                 .get(URL + "/api/user/games");
 
-        size = response.then().extract().jsonPath().getList("$").size();
-    }
-
-    @Test
-    public void postAddGame() {
-        Specifications.installSpecification(
-                Specifications.requestSpecification(URL), Specifications.responseSpecification201()
-        );
-
-        Response response = given()
-                .header("Authorization", "Bearer " + new RequestUser().getToken())
+        Response response1 = given()
+                .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
                 .contentType("application/json")
-                .body(new Root(gameId))
+                .body(new Game().getGame())
                 .when()
                 .post(URL + "/api/user/games");
-    }
 
-    @Test
-    public void getAllGamePlusOne() {
-        Specifications.installSpecification(
-                Specifications.requestSpecification(URL),
-                Specifications.responseSpecification200()
-        );
-
-        Response response = given()
-                .header("Authorization", "Bearer " + new RequestUser().getToken())
+        Response response2 = given()
+                .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
                 .when()
                 .get(URL + "/api/user/games");
 
-        Assertions.assertEquals(size++, response.then().extract().jsonPath().getList("$").size());
+        int size = response.then().extract().jsonPath().getList("$").size();
+        size++;
+        Assertions.assertEquals(size, response2.then().extract().jsonPath().getList("$").size());
     }
 
     @Test
@@ -63,7 +45,7 @@ public class RequestGame {
         );
 
         Response response = given()
-                .header("Authorization", "Bearer " + new RequestUser().getToken())
+                .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
                 .when()
                 .delete(URL + "/api/user/games/" + gameId);
 

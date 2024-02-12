@@ -1,5 +1,6 @@
 package api;
 
+import dto.Token;
 import dto.User;
 import dto.UserReg;
 import io.restassured.http.ContentType;
@@ -16,7 +17,6 @@ public class RequestUser {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final Random RANDOM = new Random();
 
-    private String login;
     private final String newPassword = "twsqss";
 
     public static String generateRandomString() {
@@ -36,8 +36,7 @@ public class RequestUser {
                 Specifications.requestSpecification(URL), Specifications.responseSpecification201()
         );
 
-        login = generateRandomString();
-        UserReg userReg = new UserReg(login, "root");
+        UserReg userReg = new UserReg("login", "root");
 
         Response response = given()
                 .contentType(ContentType.JSON)
@@ -58,32 +57,16 @@ public class RequestUser {
     }
 
     @Test
-    public String getToken() {
-        Specifications.installSpecification(
-                Specifications.requestSpecification(URL), Specifications.responseSpecification200()
-        );
-
-        User user = new User("root", login);
-
-        Response response = given()
-                .contentType(ContentType.JSON)
-                .body(user)
-                .when()
-                .post(URL + "/api/login");
-
-        return response.then().extract().jsonPath().get("token").toString();
-    }
-
-    @Test
     public void putPassword() {
         Specifications.installSpecification(
                 Specifications.requestSpecification(URL), Specifications.responseSpecification200()
         );
 
-        String requestBody = "{\"password\": \""+newPassword+"\"}";
+
+        String requestBody = "{\"password\": \"" + newPassword + "\"}";
 
         Response response = given()
-                .header("Authorization", "Bearer " + getToken())
+                .header("Authorization", "Bearer " + getToken("login","root"))
                 .contentType("application/json")
                 .body(requestBody)
                 .when()
@@ -100,7 +83,7 @@ public class RequestUser {
         );
 
         Response response = given()
-                .header("Authorization", "Bearer " + getToken())
+                .header("Authorization", "Bearer " + getToken("login", newPassword))
                 .when()
                 .get(URL + "/api/user");
 
@@ -114,11 +97,24 @@ public class RequestUser {
         );
 
         Response response = given()
-                .header("Authorization", "Bearer " + getToken())
+                .header("Authorization", "Bearer " + getToken("login",newPassword))
                 .when()
                 .delete(URL + "/api/user");
 
         Assertions.assertNotNull(response.then().extract().jsonPath().get("info.message"));
         Assertions.assertEquals("success", response.then().extract().jsonPath().get("info.status").toString());
+    }
+
+    public String getToken(String login, String pass) {
+
+        User user = new User(pass, login);
+
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .when()
+                .post(URL + "/api/login");
+
+        return response.then().extract().jsonPath().get("token").toString();
     }
 }

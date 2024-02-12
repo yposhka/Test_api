@@ -1,9 +1,9 @@
 package dto.game;
 
 public class Requirements {
-    private int hardDrive = 12;
+    private int hardDrive = 0;
     private String osName = "Test";
-    private int ramGb = 12;
+    private int ramGb = 0;
     private String videoCard = "Test";
 
     public Requirements() {

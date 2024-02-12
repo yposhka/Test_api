@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="api.RequestFiles" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-11T13:33:14" hostname="DESKTOP-OCM6K51" time="1.838">
-  <properties/>
-  <testcase name="getImage()" classname="api.RequestFiles" time="1.13"/>
-  <testcase name="postImage()" classname="api.RequestFiles" time="0.707"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

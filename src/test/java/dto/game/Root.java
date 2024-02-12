@@ -6,19 +6,19 @@ public class Root{
     private String company = "Test";
     private String description  = "Test";
     private ArrayList<Dlc> dlcs = new ArrayList<>();
-    private int gameId;
+    private int gameId = 0;
     private String genre = "Test";
     private boolean isFree = true;
-    private int price = 2222;
-    private String publish_date = "2024-02-11T09:45:39.245Z";
-    private int rating = 10;
+    private int price = 0;
+    private String publish_date = "2024-02-12T07:29:40.919Z";
+    private int rating = 0;
     private boolean requiredAge = true;
     private Requirements requirements = new Requirements();
-    private ArrayList<String> tags = null;
+    private ArrayList<String> tags = new ArrayList<>();
     private String title = "Test";
 
-    public Root(int gameId) {
-        this.gameId = gameId;
+    public Root() {
+
     }
 
     public String getCompany() {
