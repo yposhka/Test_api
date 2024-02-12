@@ -7,7 +7,7 @@
 * Фреймворк для тестирования: JUnit 4.13.2 и JUnit JUpiter 5.7.0;
 * Библиотека для работы с JSON: Jackson 2.16.1.
 ### Классы и методы
->Ссылка на открытую API - http://85.192.34.140:8080/swagger-ui/index.html# \
+>Ссылка на открытую API - http://85.192.34.140:8080/swagger-ui/index.html#
 
 >files-controller, файл - RequestFiles.java
 1. getImage - метод для проверки загрузки картинки;
@@ -29,6 +29,12 @@
 4. deleteUser - метод для удаления аккаунта пользователя.
 
 ## Работа с SQL
->папка: SQL, файл - Проверки.md, файл - Проверки.pdf
+>папка: SQL \
+>файл - Проверки.md и файл - Проверки.pdf \
 В данных файлах хранятся sql скрипты для проверки БД - Расписание. \
 Ссылка на песчницу - https://sql-academy.org/ru/sandbox
+
+
+### <span style="color:red"> Пометка </span>
+Если при запуске проекта сброщик выдает ошибку: Конфликт версии Java и версии Gradle. То нужно будет именить версии Gradle (8.1 или новее). \
+Файл - gradle-wrapper.properties Строка - distributionUrl=https\://services.gradle.org/distributions/gradle-8.1-bin.zip
