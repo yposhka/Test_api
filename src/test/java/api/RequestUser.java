@@ -1,6 +1,5 @@
 package api;
 
-import dto.Token;
 import dto.User;
 import dto.UserReg;
 import io.restassured.http.ContentType;
@@ -61,7 +60,6 @@ public class RequestUser {
         Specifications.installSpecification(
                 Specifications.requestSpecification(URL), Specifications.responseSpecification200()
         );
-
 
         String requestBody = "{\"password\": \"" + newPassword + "\"}";
 
