@@ -9,13 +9,10 @@ import static io.restassured.RestAssured.given;
 
 public class RequestGame {
     private final static String URL = "http://85.192.34.140:8080";
-    private final static int gameId = 1;
-
-    private RequestUser requestUser = new RequestUser();
+    private final RequestUser requestUser = new RequestUser();
 
     @Test
     public void getAllGame() {
-
         Response response = given()
                 .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
                 .when()
@@ -35,7 +32,11 @@ public class RequestGame {
 
         int size = response.then().extract().jsonPath().getList("$").size();
         size++;
+
         Assertions.assertEquals(size, response2.then().extract().jsonPath().getList("$").size());
+        Assertions.assertEquals(200,response.statusCode());
+        Assertions.assertEquals(201,response1.statusCode());
+        Assertions.assertEquals(200,response2.statusCode());
     }
 
     @Test
@@ -47,9 +48,16 @@ public class RequestGame {
         Response response = given()
                 .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
                 .when()
+                .get(URL + "/api/user/games");
+
+        int gameId = response.then().extract().jsonPath().get("[1].gameId");
+
+        Response response1 = given()
+                .header("Authorization", "Bearer " + requestUser.getToken("login","root"))
+                .when()
                 .delete(URL + "/api/user/games/" + gameId);
 
-        Assertions.assertNotNull(response.then().extract().jsonPath().get("info.message"));
-        Assertions.assertEquals("success", response.then().extract().jsonPath().get("info.status").toString());
+        Assertions.assertNotNull(response1.then().extract().jsonPath().get("info.message"));
+        Assertions.assertEquals("success", response1.then().extract().jsonPath().get("info.status").toString());
     }
 }

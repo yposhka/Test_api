@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="api.RequestGame" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-12T07:52:23" hostname="DESKTOP-OCM6K51" time="2.394">
+<testsuite name="api.RequestGame" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-12T08:06:53" hostname="DESKTOP-OCM6K51" time="2.271">
   <properties/>
-  <testcase name="getAllGame()" classname="api.RequestGame" time="2.394"/>
+  <testcase name="getAllGame()" classname="api.RequestGame" time="2.271"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
