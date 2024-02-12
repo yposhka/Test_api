@@ -13,10 +13,8 @@
 1. getImage - метод для проверки загрузки картинки;
 2. postImage - метод для проверки отправки файла на сервер.
 >game-controller-new, файл - RequestGame.java
-1. getAllGame - метод для получения массива игр;
-2. postAddGame - метод для добавления игры в свой список;
-3. getAllGamePlusOne - метод для получения обновленного массива и сравнения результатов с методом getAllGame;
-4. deleteGame - метод для удаления игры по id.
+1. getAllGame - метод для получения массива игр после добавление игры в свой список, получение обновленного массива и сравнения результатов с методом getAllGame;
+2. deleteGame - метод для удаления игры по id.
 >jwt-authentication-controller, файл - RequestUser.java
 1. getToken - метод для получения jwt токена.
 >status-codes-controller, файл - RequestStatusCode.java
